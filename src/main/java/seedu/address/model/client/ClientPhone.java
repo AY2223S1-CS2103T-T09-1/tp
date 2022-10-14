@@ -43,9 +43,4 @@ public class ClientPhone {
                 && value.equals(((ClientPhone) other).value)); // state check
     }
 
-    @Override
-    public int hashCode() {
-        return value.hashCode();
-    }
-
 }
