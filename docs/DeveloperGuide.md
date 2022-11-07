@@ -753,7 +753,7 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `filter sold`<br/>Expected: No transaction is filtered. Error details shown in the `Application's Reply` panel.
    3. Other incorrect filter commands to try: `filter`, `filter all`, `filter 1`<br/>Expected: Similar to previous.
 
-### Sorting transactions from a client
+### Sorting transactions of a client
 
 1. Sorting transactions.
 
@@ -774,6 +774,15 @@ testers are expected to do more *exploratory* testing.
 2. Adding a transaction while more than one client is shown in the client list.
    1. Prerequisites: List all clients using the `list` command. More than one client in the list.
    2. Test case: `buy 1 g/apples price/test q/100`<br/>Expected: No transaction is added. Error details shown in the Application's Reply panel.
+
+### Help Command
+
+1. Executing the Help Command.
+
+    1. Test case: `help`<br/>Expected: Display all the valid commands' usage message.
+    2. Test case: `help buy`<br/>Expected: Display help commands usage message.
+    3. Test case: `help me please`<br/>Expected: Not a valid command. Error details shown in the `Application's Reply` panel.
+    4. Other incorrect help commands to try:`help add buy`, `help 3`, `help elgin`<br/>Expected: Similar to previous.
 
 ### Saving data
 
