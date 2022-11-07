@@ -761,7 +761,7 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `sort 1 latest`<br/>Expected: All transactions in index 1 client will be displayed in the transaction list panel, sorted with the latest transactions first.
    If there are no transactions, the transaction list panel will be empty.
    3. Test case: `sort 2 newest`<br/>Expected: No transactions for index 2 client is sorted. Error details shown in the `Application's Reply` panel.
-   4. Other incorrect sort commands to try: `sort all latest`, `sort oldest`, `sort newest`<br/>Expected: Similar to previous.
+   4. Other incorrect sort commands to try: `sort all latest`, `sort me`, `sort newest`<br/>Expected: Similar to previous.
     
 ### Adding buy/sell transactions
 
