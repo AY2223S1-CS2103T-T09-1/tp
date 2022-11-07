@@ -15,7 +15,9 @@ title: Developer Guide
 * [Implementation](#implementations)
     * [Filter transaction feature](#filter-feature-for-transactions)
     * [Buy / Sell transaction feature](#buysell-feature-for-transactions)
-    * [Edit transaction feature](#editing-feature-for-transactions)
+    * [Editing client feature](#editing-client-feature)
+    * [Editing transactions feature](#editing-transactions-feature)
+    * [Editing remarks feature](#editing-remarks-feature)
     * [Delete Client/Transaction/Remark feature](#delete-clienttransactionremark-feature)
     * [Sort feature](#sort-feature)
 * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
@@ -27,12 +29,15 @@ title: Developer Guide
       * [Delete a transaction](#use-case-uc02---delete-a-transaction)
       * [Delete a remark](#use-case-uc03---delete-a-remark)
       * [Find a client](#use-case-uc04---find-a-client)
-      * [Add a remark to a client](#use-case-uc05---add-a-remark-to-a-client-br)
+      * [Add a remark to a client](#use-case-uc05---add-a-remark-to-a-client)
       * [Requesting help](#use-case-uc06---requesting-help)
       * [Clearing all data](#use-case-uc07---clearing-all-data)
       * [Buying from a client](#use-case-uc08---buying-from-a-client)
       * [Selling to a client](#use-case-uc09---selling-to-a-client)
       * [Sorting a client](#use-case-uc10---sort-client-by-latest-transaction-br)
+      * [Edit a client](#use-case-uc11---edit-a-client)
+      * [Edit a transaction](#use-case-uc12---edit-a-transaction)
+      * [Edit a remark](#use-case-uc13---edit-a-remark)
     * [Non-Functional Requirements](#non-functional-requirements)
     * [Glossary](#glossary)
 * [Appendix: Instructions for manual testing](#appendix-instructions-for-manual-testing)
@@ -41,6 +46,9 @@ title: Developer Guide
   * [Delete a transaction](#deleting-a-transaction)
   * [Delete a remark](#deleting-a-remark)
   * [Filtering transactions](#filtering-transactions-from-all-clients)
+  * [Editing a client](#editing-a-client)
+  * [Editing a transaction](#editing-a-transaction)
+  * [Editing a remark](#editing-a-remark)
   * [Sort a client](#sorting-transactions-from-a-client)
   * [Saving data](#saving-data)
 
@@ -753,6 +761,40 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `filter sold`<br/>Expected: No transaction is filtered. Error details shown in the `Application's Reply` panel.
    3. Other incorrect filter commands to try: `filter`, `filter all`, `filter 1`<br/>Expected: Similar to previous.
 
+### Editing a client
+
+1. Editing a client in the client list.
+
+    1. Test case: `edit 1 m/client n/JohnDoe`<br/>Expected: First client's name is changed to JohnDoe. Details of the edited client shown in the `Application's Reply` panel.
+    2. Test case: `edit 0 m/client`<br/>Expected: No client is edited. Error details shown in the `Application's Reply` panel.
+    3. Other incorrect edit client commands to try: `edit`, `edit x m/client` (where x is larger than the transaction list size), `edit 1 m/client n/`, `delete 1`<br/>Expected: Similar to previous.
+
+### Editing a transaction
+
+1. Editing a transaction while only one client is shown in the client list.
+
+    1. Prerequisites: View a single client using the `view` command. Use `view 1` (must have at least one client in the list). Multiple transactions in the transaction list panel.
+    2. Test case: `edit 1 m/transaction g/Oranges q/100`<br/>Expected: First transaction goods name and quantity is edited in the list. Details of the edited transaction shown in the `Application's Reply` panel.
+    3. Test case: `edit 0 m/transaction`<br/>Expected: No transaction is edited. Error details shown in the `Application's Reply` panel.
+    4. Other incorrect edit transaction commands to try: `edit`, `edit x m/transaction` (where x is larger than the transaction list size),`edit 1 m/transaction q/12g/`edit 1`<br/>Expected: Similar to previous.
+
+2. Editing a transaction while more than one client is shown in the client list.
+    1. Prerequisites: List all clients using the `list` command. More than one client in the list.
+    2. Test case: `edit 1 m/transaction g/Apples`<br/>Expected: No transaction is edited. Error details shown in the `Application's Reply` panel.
+
+### Editing a remark
+
+1. Editing a remark while only one client is shown in the client list.
+
+    1. Prerequisites: View a single client using the `view` command. Use `view 1` (must have at least one client in the list). One or multiple remarks in the transaction list panel.
+    2. Test case: `edit 1 m/remark new Edited Remark`<br/>Expected: First remark is edited in the list to be `new Edited Remark`. Details of the edited remark shown in the `Application's Reply` panel.
+    3. Test case: `edit 0 m/remark`<br/>Expected: No remark is edited. Error details shown in the `Application's Reply` panel.
+    4. Other incorrect edit remark commands to try: `edit`, `edit x m/remark` (where x is larger than the transaction list size)<br/>Expected: Similar to previous.
+
+2. Editing a remark while more than one client is shown in the client list.
+    1. Prerequisites: List all clients using the `list` command. More than one client in the list.
+    2. Test case: `edit 1 m/remark newRemark`<br/>Expected: No remark is edited. Error details shown in the `Application's Reply` panel.
+    
 ### Sorting transactions of a client
 
 1. Sorting transactions.
@@ -794,7 +836,8 @@ testers are expected to do more *exploratory* testing.
 
     1. Open the `jeeqtracker.json` file. Change one field to an invalid data, e.g. change the `price` field to contain value `123abc`. Launch the application<br/>Expected: Application starts up with no data. 
 
-1. _{ more test cases …​ }_
+
+_{ more test cases …​ }_
 
 ## **Appendix: Effort**
 
